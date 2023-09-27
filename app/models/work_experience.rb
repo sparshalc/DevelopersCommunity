@@ -29,6 +29,36 @@ class WorkExperience < ApplicationRecord
     !currently_working_here
   end
 
+
+  def company_with_employment_type
+    "#{company} (#{employment_type})".strip
+  end
+
+  def job_location
+    "#{location} (#{location_type})".strip
+  end
+
+  def job_duration
+    months = if end_date.present?
+              fetchDate(end_date)
+            else
+              fetchDate(Date.today)
+            end
+    result = months.divmod(12)
+
+    duration = "#{result.first} #{result.first > 1 ? 'years' : 'year' } #{result.last} #{result.last > 1 ? 'months' : 'month' }"
+
+    if currently_working_here
+      "#{start_date.strftime("%b %Y")} - Present (#{duration})"
+    else
+      "#{start_date.strftime("%b %Y")} - #{end_date.strftime("%b %Y")} (#{duration})"
+    end
+  end
+
+  def fetchDate(date)
+    ((date.year - start_date.year)*12 + date.month - start_date.month - ( date.day >= start_date.day ? 0 : 1 )).round
+  end
+
   def end_date_greater_than_start_date
     return if end_date.nil?
      if end_date < start_date

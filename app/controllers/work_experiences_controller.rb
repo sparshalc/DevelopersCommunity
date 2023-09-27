@@ -35,9 +35,8 @@ class WorkExperiencesController < ApplicationController
         format.turbo_stream { render turbo_stream: turbo_stream.remove("work_experience_item_#{@work_experience.id}")}
       end
     end
-  
+
     private
-  
     def set_work_experience
       @work_experience = current_user.work_experiences.find(params[:id])
     end
