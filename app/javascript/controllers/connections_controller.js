@@ -2,13 +2,15 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="connections"
 export default class extends Controller {
-  static targets = ['connection']
+  static targets = ["connection"]
   connect() {
   }
-  initialize(){
-    this.element.setAttribute('data-action', 'click->connections#prepareConnectionParams')
+
+  initialize() {
+    this.element.setAttribute("data-action", "click->connections#prepareConnectionParams")
   }
-  prepareConnectionParams(event){
+
+  prepareConnectionParams() {
     event.preventDefault()
     this.url = this.element.getAttribute("href")
 
@@ -21,7 +23,6 @@ export default class extends Controller {
     connectionBody.append("connection[user_id]", requesterId)
     connectionBody.append("connection[connected_user_id]", connectedId)
     connectionBody.append("connection[status]", "pending")
-    
 
     fetch(this.url, {
       method: "POST",
