@@ -2,7 +2,7 @@ class AddConnectedUserIdsToUsers < ActiveRecord::Migration[7.0]
   def up
     add_column :users, :connected_user_ids, :integer, array: true, default: []
 
-    ActiveRecord::Base.transaction do
+    ActiveRecord::Base.transaction do 
       User.find_each do |user|
         requested_connections = Connection.includes(:requested).where(user_id: user.id, status: 'accepted')
         received_connections = Connection.includes(:received).where(connected_user_id: user.id, status: 'accepted')
