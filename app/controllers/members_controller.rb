@@ -3,12 +3,13 @@ class MembersController < ApplicationController
     def show
         @user = User.find(params[:id])
         @connections = Connection.where("user_id = ? OR connected_user_id = ? ", params[:id], params[:id]).where(status: 'accepted')
+        @mutual_connections = current_user.connected_user_ids.intersection(@user.connected_user_ids)
     end
     
     def connections
         @requested_connections = Connection.includes(:requested).where(user_id: params[:id], status: 'accepted')
-        @recieved_connections = Connection.includes(:recieved).where(connected_user_id: params[:id], status: 'accepted')
-        @total_connections = @requested_connections.count + @recieved_connections.count
+        @received_connections = Connection.includes(:received).where(connected_user_id: params[:id], status: 'accepted')
+        @total_connections = @requested_connections.count + @received_connections.count
     end
 
     def edit_description

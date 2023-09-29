@@ -31,8 +31,8 @@
               </div>
               <div class="col-lg-10">
                 <div class="card-body">
-                  <%= link_to member_path(connection.requested), style: 'text-decoration-none;', target: "_blank" do%>
-                    <h4 style="margin-bottom: -2px;"><%= connection.requested.full_name %></h4>
+                  <%= link_to member_path(connection.received), style: 'text-decoration-none;', target: "_blank" do%>
+                    <h4 style="margin-bottom: -2px;"><%= connection.received.full_name %></h4>
                   <% end %>
                   <small class="text-muted"><%= connection.received.profile_title %></small><br>
                   <small class="text-muted"><%= connection.received.address %></small><br>
