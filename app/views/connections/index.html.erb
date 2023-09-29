@@ -18,7 +18,7 @@
                     <small class="text-muted"><%= connection.requested.profile_title  %></small>
                   </div>
                   <div class="d-grid">
-                    <% link_to connection.status.titleize, "javascript.void(0)", class: "#{connection.status_btn}"%>
+                    <%= link_to connection.status.titleize, "javascript.void(0)", class: "#{connection.status_btn}"%>
                   </div>
                 </div>
               </div>

@@ -67,8 +67,12 @@ class User < ApplicationRecord
     def address
       "#{city}, #{state} - #{pincode}, #{country}".strip
     end
+
+    def my_connection(user)
+      Connection.where("(user_id = ? AND connected_user_id = ? ) OR (user_id = ? AND connected_user_id = ? )", user.id, id, id, user.id)
+    end
     
-    def check_if_already_connected?(current_user, user)
-      current_user != user && !current_user.connections.pluck(:connected_user_id).include?(user.id)
+    def check_if_already_connected?(user)
+      self!= user && !my_connection(user).present?
     end
 end
