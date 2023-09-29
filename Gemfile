@@ -76,3 +76,5 @@ gem 'ransack'
 gem 'devise'
 gem 'kaminari'
 gem 'cssbundling-rails'
+
+gem "letter_opener", "~> 1.8"
